@@ -1,0 +1,59 @@
+/* Resume */
+
+.resume-card { padding: 6px; margin-bottom: 20px; }
+
+.dropzone {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-lg);
+  padding: 44px 28px;
+  cursor: pointer;
+  transition: border-color var(--transition);
+  text-align: center;
+}
+.dropzone:hover { border-color: var(--border-hover); }
+.dropzone--active { border-color: var(--accent); background: var(--accent-subtle); }
+.dropzone--file { padding: 20px; border-style: solid; }
+
+.dropzone__empty { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.dropzone__upload-icon { font-size: 1.75rem; color: var(--text-muted); }
+.dropzone__text { font-size: 0.875rem; color: var(--text-primary); font-weight: 500; }
+.dropzone__hint { font-size: 0.75rem; color: var(--text-muted); }
+
+.dropzone__file { display: flex; align-items: center; gap: 12px; }
+.dropzone__file-icon {
+  width: 40px; height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--orange-subtle);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.15rem; color: var(--orange); flex-shrink: 0;
+}
+.dropzone__file-info { flex: 1; text-align: left; }
+.dropzone__file-name { display: block; font-size: 0.8125rem; font-weight: 500; word-break: break-all; }
+.dropzone__file-size { font-size: 0.6875rem; color: var(--text-muted); }
+.dropzone__file-rm {
+  width: 32px; height: 32px;
+  border-radius: var(--radius-sm);
+  background: var(--red-subtle); border: none;
+  color: var(--red); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; flex-shrink: 0;
+}
+.dropzone__file-rm:hover { opacity: 0.8; }
+
+.resume-card__actions { padding: 14px 14px 10px; display: flex; justify-content: center; }
+
+/* Status */
+.resume-status { padding: 20px; }
+.resume-status__header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.resume-status__check { font-size: 1.3rem; color: var(--green); flex-shrink: 0; }
+.resume-status__title { font-size: 0.9375rem; font-weight: 600; }
+.resume-status__file { font-size: 0.75rem; color: var(--text-muted); margin-top: 1px; }
+
+.resume-status__preview {
+  margin-bottom: 14px; padding: 14px;
+  background: var(--bg-body); border-radius: var(--radius-md);
+}
+.resume-status__plabel { font-size: 0.6875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 6px; }
+.resume-status__ptext { font-size: 0.75rem; color: var(--text-secondary); line-height: 1.55; max-height: 100px; overflow-y: auto; }
+
+.resume-status__note { font-size: 0.75rem; color: var(--text-muted); }

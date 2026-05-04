@@ -4,10 +4,11 @@ import Interview from '../models/Interview.model.js';
 
 // Initialize Gemini
 const getGenAI = () => {
-  if (!process.env.GEMINI_API_KEY || process.env.GEMINI_API_KEY === 'your_gemini_api_key_here') {
+  const apiKey = process.env.GEMINI_API_KEY?.trim();
+  if (!apiKey || apiKey === 'your_gemini_api_key_here' || apiKey.startsWith('sk-')) {
     return null;
   }
-  return new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+  return new GoogleGenerativeAI(apiKey);
 };
 
 // @desc    Generate interview questions from resume
@@ -26,10 +27,11 @@ export const generateQuestions = async (req, res) => {
     let questions;
 
     if (genAI) {
-      // Use Gemini API
-      const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+      try {
+        // Use Gemini API
+        const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
-      const prompt = `You are an expert technical interviewer. Based on the following resume, generate exactly ${count} interview questions for a ${category} interview.
+        const prompt = `You are an expert technical interviewer. Based on the following resume, generate exactly ${count} interview questions for a ${category} interview.
 
 Resume:
 ${user.resumeText.substring(0, 3000)}
@@ -50,15 +52,19 @@ Requirements:
 
 Return ONLY the JSON array, no other text.`;
 
-      const result = await model.generateContent(prompt);
-      const responseText = result.response.text();
+        const result = await model.generateContent(prompt);
+        const responseText = result.response.text();
 
-      // Extract JSON from response
-      const jsonMatch = responseText.match(/\[[\s\S]*\]/);
-      if (jsonMatch) {
-        questions = JSON.parse(jsonMatch[0]);
-      } else {
-        throw new Error('Failed to parse AI response');
+        // Extract JSON from response
+        const jsonMatch = responseText.match(/\[[\s\S]*\]/);
+        if (jsonMatch) {
+          questions = JSON.parse(jsonMatch[0]);
+        } else {
+          throw new Error('Failed to parse AI response');
+        }
+      } catch (aiError) {
+        console.warn('Gemini questions generation failed. Falling back to local questions:', aiError.message);
+        questions = generateFallbackQuestions(user.resumeText, category, count);
       }
     } else {
       // Fallback questions when no API key
@@ -102,9 +108,10 @@ export const submitAnswer = async (req, res) => {
     let feedback;
 
     if (genAI) {
-      const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+      try {
+        const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
-      const prompt = `You are an expert interviewer evaluating a candidate's answer.
+        const prompt = `You are an expert interviewer evaluating a candidate's answer.
 
 Question: ${question}
 Candidate's Answer: ${answer}
@@ -121,14 +128,18 @@ Evaluate the answer and return ONLY a valid JSON object with this structure:
 
 Be fair but thorough. Return ONLY the JSON object.`;
 
-      const result = await model.generateContent(prompt);
-      const responseText = result.response.text();
+        const result = await model.generateContent(prompt);
+        const responseText = result.response.text();
 
-      const jsonMatch = responseText.match(/\{[\s\S]*\}/);
-      if (jsonMatch) {
-        feedback = JSON.parse(jsonMatch[0]);
-      } else {
-        throw new Error('Failed to parse AI response');
+        const jsonMatch = responseText.match(/\{[\s\S]*\}/);
+        if (jsonMatch) {
+          feedback = JSON.parse(jsonMatch[0]);
+        } else {
+          throw new Error('Failed to parse AI response');
+        }
+      } catch (aiError) {
+        console.warn('Gemini feedback generation failed. Falling back to local feedback:', aiError.message);
+        feedback = generateFallbackFeedback(question, answer);
       }
     } else {
       // Fallback feedback
@@ -175,15 +186,16 @@ export const completeInterview = async (req, res) => {
     let overallFeedback;
 
     if (genAI) {
-      const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+      try {
+        const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
-      const questionsData = interview.questions.map(q => ({
-        question: q.question,
-        answer: q.userAnswer,
-        score: q.score
-      }));
+        const questionsData = interview.questions.map(q => ({
+          question: q.question,
+          answer: q.userAnswer,
+          score: q.score
+        }));
 
-      const prompt = `Based on these interview results, provide an overall assessment:
+        const prompt = `Based on these interview results, provide an overall assessment:
 ${JSON.stringify(questionsData)}
 
 Return ONLY a valid JSON object:
@@ -195,11 +207,14 @@ Return ONLY a valid JSON object:
   "summary": "<2-3 sentence overall summary>"
 }`;
 
-      const result = await model.generateContent(prompt);
-      const responseText = result.response.text();
-      const jsonMatch = responseText.match(/\{[\s\S]*\}/);
-      if (jsonMatch) {
-        overallFeedback = JSON.parse(jsonMatch[0]);
+        const result = await model.generateContent(prompt);
+        const responseText = result.response.text();
+        const jsonMatch = responseText.match(/\{[\s\S]*\}/);
+        if (jsonMatch) {
+          overallFeedback = JSON.parse(jsonMatch[0]);
+        }
+      } catch (aiError) {
+        console.warn('Gemini overall feedback generation failed. Falling back to local summary:', aiError.message);
       }
     }
 

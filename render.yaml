@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: prepai-backend
+    env: node
+    rootDir: Backend
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    autoDeploy: true

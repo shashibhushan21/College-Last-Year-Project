@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { HiOutlineDocumentText, HiOutlineChatAlt2, HiOutlineChartBar, HiOutlineLightningBolt, HiOutlineShieldCheck, HiOutlineGlobe } from 'react-icons/hi';
+import interviewScene from '../../assets/illustrations/interview-scene.svg';
+import interviewChecklist from '../../assets/illustrations/interview-checklist.svg';
+import conversationCard from '../../assets/illustrations/conversation-card.svg';
 import './Landing.css';
 
 const fade = {
@@ -12,12 +15,12 @@ const fade = {
 };
 
 const features = [
-  { icon: <HiOutlineDocumentText />, title: 'Resume Parsing', desc: 'Upload your resume. AI extracts your skills and experience to build a personalized interview.' },
-  { icon: <HiOutlineChatAlt2 />, title: 'Mock Interviews', desc: 'Chat-based interviews that adapt questions to your background and experience level.' },
-  { icon: <HiOutlineChartBar />, title: 'Performance Tracking', desc: 'See your scores, strengths, and weak areas across all your practice sessions.' },
+  { icon: <HiOutlineDocumentText />, title: 'Resume Parsing', desc: 'Upload your resume and turn it into a focused interview practice plan.' },
+  { icon: <HiOutlineChatAlt2 />, title: 'Mock Interviews', desc: 'Practice in a chat-based format that feels close to the real thing.' },
+  { icon: <HiOutlineChartBar />, title: 'Performance Tracking', desc: 'See your scores, strengths, and weak areas across every session.' },
   { icon: <HiOutlineLightningBolt />, title: 'Instant Feedback', desc: 'Get scored on every answer with clear suggestions on how to improve.' },
-  { icon: <HiOutlineShieldCheck />, title: 'Tailored Questions', desc: 'Questions generated from your actual resume — not generic templates.' },
-  { icon: <HiOutlineGlobe />, title: 'Multiple Domains', desc: 'Practice for technical, behavioral, and system design interviews.' }
+  { icon: <HiOutlineShieldCheck />, title: 'Tailored Questions', desc: 'Questions are based on your own background instead of generic templates.' },
+  { icon: <HiOutlineGlobe />, title: 'Multiple Domains', desc: 'Practice technical, behavioral, and system design interviews.' }
 ];
 
 const steps = [
@@ -31,24 +34,43 @@ export default function Landing() {
     <div className="landing">
       {/* Hero */}
       <section className="hero">
-        <div className="hero__inner">
-          <motion.span className="hero__tag" variants={fade} initial="hidden" animate="visible" custom={0}>
-            Interview prep, powered by AI
-          </motion.span>
+        <div className="hero__inner hero__inner--split">
+          <motion.div className="hero__copy" variants={fade} initial="hidden" animate="visible" custom={0}>
+            <h1 className="hero__heading">
+              Practice interviews.
+              <br />
+              <span className="hero__heading-accent">See where you stand.</span>
+            </h1>
 
-          <motion.h1 className="hero__heading" variants={fade} initial="hidden" animate="visible" custom={1}>
-            Practice interviews.<br />
-            Get better. Get hired.
-          </motion.h1>
+            <p className="hero__desc">
+              PrepAI turns your resume into a polished practice routine with clear prompts,
+              structured feedback, and a calm, focused experience that feels more like a real interview.
+            </p>
 
-          <motion.p className="hero__desc" variants={fade} initial="hidden" animate="visible" custom={2}>
-            Upload your resume, answer AI-generated questions, and receive instant 
-            feedback to improve your interview skills — all in one place.
-          </motion.p>
+            <div className="hero__btns">
+              <Link to="/register" className="btn btn-primary btn-lg">Get started</Link>
+              <a href="#features" className="btn btn-secondary btn-lg">Explore the flow</a>
+            </div>
+          </motion.div>
 
-          <motion.div className="hero__btns" variants={fade} initial="hidden" animate="visible" custom={3}>
-            <Link to="/register" className="btn btn-primary btn-lg">Get started — it's free</Link>
-            <a href="#features" className="btn btn-secondary btn-lg">See how it works</a>
+          <motion.div className="hero__visual" variants={fade} initial="hidden" animate="visible" custom={1}>
+            <div className="hero__art hero__art--main">
+              <img src={interviewScene} alt="People preparing for an interview" />
+            </div>
+            <div className="hero__art hero__art--small hero__art--top">
+              <img src={conversationCard} alt="Interview conversation illustration" />
+            </div>
+            <div className="hero__art hero__art--small hero__art--bottom">
+              <img src={interviewChecklist} alt="Interview checklist illustration" />
+            </div>
+            <div className="hero__note hero__note--one">
+              <strong>Realistic practice</strong>
+              <span>Questions based on your resume and target role.</span>
+            </div>
+            <div className="hero__note hero__note--two">
+              <strong>Clear review</strong>
+              <span>See strengths, weak spots, and next steps.</span>
+            </div>
           </motion.div>
         </div>
       </section>

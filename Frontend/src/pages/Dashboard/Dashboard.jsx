@@ -4,7 +4,8 @@ import { useAuth } from '../../context/AuthContext';
 import { dashboardService } from '../../services/services';
 import { motion } from 'framer-motion';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { HiOutlineDocumentText, HiOutlineChatAlt2, HiOutlineTrendingUp, HiOutlineStar, HiOutlineUpload, HiOutlineArrowRight, HiOutlineCalendar, HiOutlineCheckCircle } from 'react-icons/hi';
+import { HiOutlineDocumentText, HiOutlineChatAlt2, HiOutlineTrendingUp, HiOutlineStar, HiOutlineUpload, HiOutlineArrowRight, HiOutlineCheckCircle } from 'react-icons/hi';
+import dashboardOverview from '../../assets/illustrations/dashboard-overview.svg';
 import './Dashboard.css';
 
 const fade = {
@@ -47,19 +48,22 @@ export default function Dashboard() {
 
   return (
     <div className="page-wrap">
-      {/* Header */}
       <motion.div className="dash-header" variants={fade} initial="hidden" animate="visible" custom={0}>
-        <div>
+        <div className="dash-header__copy">
+          <span className="dash-kicker">Preparation dashboard</span>
           <h1 className="page-title">Welcome, {user?.name?.split(' ')[0]}</h1>
-          <p className="page-subtitle">Your interview preparation at a glance</p>
+          <p className="page-subtitle">Track progress, review strengths, and jump straight back into practice.</p>
+          <div className="dash-header__actions">
+            {!stats?.hasResume && <Link to="/resume" className="btn btn-secondary btn-sm"><HiOutlineUpload /> Upload Resume</Link>}
+            <Link to="/interview" className="btn btn-primary btn-sm"><HiOutlineChatAlt2 /> Start Interview</Link>
+          </div>
         </div>
-        <div className="dash-header__actions">
-          {!stats?.hasResume && <Link to="/resume" className="btn btn-secondary btn-sm"><HiOutlineUpload /> Upload Resume</Link>}
-          <Link to="/interview" className="btn btn-primary btn-sm"><HiOutlineChatAlt2 /> Start Interview</Link>
+
+        <div className="dash-header__visual card">
+          <img src={dashboardOverview} alt="Dashboard overview illustration" />
         </div>
       </motion.div>
 
-      {/* Stat Cards */}
       <div className="dash-stats">
         {[
           { icon: <HiOutlineDocumentText />, value: stats?.totalInterviews || 0, label: 'Interviews', color: 'blue' },
@@ -77,25 +81,17 @@ export default function Dashboard() {
         ))}
       </div>
 
-      {/* Grid */}
       <div className="dash-grid">
-        {/* Chart */}
         <motion.div className="dash-chart card" variants={fade} initial="hidden" animate="visible" custom={5}>
           <h3 className="card-title">Score History</h3>
           {stats?.scoreHistory?.length > 0 ? (
             <ResponsiveContainer width="100%" height={220}>
               <AreaChart data={stats.scoreHistory}>
-                <defs>
-                  <linearGradient id="fillScore" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="var(--accent)" stopOpacity={0.15} />
-                    <stop offset="100%" stopColor="var(--accent)" stopOpacity={0} />
-                  </linearGradient>
-                </defs>
                 <CartesianGrid stroke="var(--border)" strokeDasharray="3 3" />
-                <XAxis dataKey="name" tick={{ fill: '#5c5c60', fontSize: 11 }} axisLine={false} tickLine={false} />
-                <YAxis domain={[0, 10]} tick={{ fill: '#5c5c60', fontSize: 11 }} axisLine={false} tickLine={false} />
+                <XAxis dataKey="name" tick={{ fill: '#b88e45', fontSize: 11 }} axisLine={false} tickLine={false} />
+                <YAxis domain={[0, 10]} tick={{ fill: '#b88e45', fontSize: 11 }} axisLine={false} tickLine={false} />
                 <Tooltip content={<ChartTooltip />} />
-                <Area type="monotone" dataKey="score" stroke="var(--accent)" strokeWidth={2} fill="url(#fillScore)" />
+                <Area type="monotone" dataKey="score" stroke="var(--accent)" strokeWidth={2} fill="var(--accent)" fillOpacity={0.2} />
               </AreaChart>
             </ResponsiveContainer>
           ) : (
@@ -105,7 +101,6 @@ export default function Dashboard() {
           )}
         </motion.div>
 
-        {/* Skills */}
         <motion.div className="dash-skills card" variants={fade} initial="hidden" animate="visible" custom={6}>
           <h3 className="card-title">Skill Analysis</h3>
           {(stats?.topStrengths?.length > 0 || stats?.topWeaknesses?.length > 0) ? (
@@ -139,7 +134,6 @@ export default function Dashboard() {
         </motion.div>
       </div>
 
-      {/* Recent */}
       <motion.div className="dash-recent card" variants={fade} initial="hidden" animate="visible" custom={7}>
         <h3 className="card-title">Recent Interviews</h3>
         {stats?.recentInterviews?.length > 0 ? (

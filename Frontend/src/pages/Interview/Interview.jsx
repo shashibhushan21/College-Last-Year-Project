@@ -5,6 +5,7 @@ import { aiService } from '../../services/services';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
 import { HiOutlinePaperAirplane, HiOutlineCheck } from 'react-icons/hi';
+import interviewChecklist from '../../assets/illustrations/interview-checklist.svg';
 import './Interview.css';
 
 export default function Interview() {
@@ -81,8 +82,11 @@ export default function Interview() {
       <div className="iv-page">
         <div className="iv-setup">
           <motion.div className="iv-setup__card card" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
+            <div className="iv-setup__art">
+              <img src={interviewChecklist} alt="Interview checklist illustration" />
+            </div>
             <h1 className="iv-setup__title">Mock Interview</h1>
-            <p className="iv-setup__desc">AI generates questions from your resume and scores your answers in real time.</p>
+            <p className="iv-setup__desc">Practice with a calm, guided interview flow built around your resume and target role.</p>
             <div className="iv-setup__opts">
               <div className="form-group">
                 <label className="form-label">Category</label>

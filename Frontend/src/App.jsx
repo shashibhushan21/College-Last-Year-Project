@@ -49,15 +49,15 @@ function App() {
           toastOptions={{
             duration: 3000,
             style: {
-              background: '#19191c',
-              color: '#ececed',
-              border: '1px solid #2a2a2d',
+              background: '#24180d',
+              color: '#ffffff',
+              border: '1px solid #6b4a24',
               borderRadius: '8px',
               fontSize: '0.8125rem',
-              fontFamily: "'Inter', sans-serif"
+              fontFamily: "'Manrope', sans-serif"
             },
-            success: { iconTheme: { primary: '#3dba6c', secondary: '#111113' } },
-            error: { iconTheme: { primary: '#d1453b', secondary: '#111113' } }
+            success: { iconTheme: { primary: '#b85a10', secondary: '#fff8ee' } },
+            error: { iconTheme: { primary: '#c9941d', secondary: '#fff8ee' } }
           }}
         />
       </Router>

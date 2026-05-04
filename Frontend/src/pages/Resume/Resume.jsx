@@ -5,6 +5,7 @@ import { resumeService } from '../../services/services';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
 import { HiOutlineUpload, HiOutlineDocumentText, HiOutlineTrash, HiOutlineCheck } from 'react-icons/hi';
+import resumeCard from '../../assets/illustrations/resume-card.svg';
 import './Resume.css';
 
 export default function Resume() {
@@ -46,9 +47,15 @@ export default function Resume() {
 
   return (
     <div className="page-wrap" style={{ maxWidth: 620 }}>
-      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
-        <h1 className="page-title">Resume</h1>
-        <p className="page-subtitle" style={{ marginBottom: 24 }}>Upload your resume so AI can create personalized questions</p>
+      <motion.div className="resume-hero card" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
+        <div className="resume-hero__copy">
+          <span className="resume-hero__kicker">Resume upload</span>
+          <h1 className="page-title">Resume</h1>
+          <p className="page-subtitle">Upload your resume to generate a more focused and realistic practice session.</p>
+        </div>
+        <div className="resume-hero__art">
+          <img src={resumeCard} alt="Resume document illustration" />
+        </div>
       </motion.div>
 
       <motion.div className="card resume-card" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}>

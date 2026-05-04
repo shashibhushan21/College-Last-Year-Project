@@ -1,50 +1,43 @@
-/* ============================================
-   PREPAI — CLEAN DESIGN SYSTEM
-   Simple, Human, Professional
-   ============================================ */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 :root {
-  /* Backgrounds */
-  --bg-body: #111113;
-  --bg-card: #19191c;
-  --bg-elevated: #222225;
-  --bg-input: #19191c;
-  --bg-hover: #222225;
+  --bg-body: #151008;
+  --bg-card: #21180c;
+  --bg-elevated: #2a1f11;
+  --bg-input: #1a1309;
+  --bg-hover: #322415;
 
-  /* Text */
-  --text-primary: #ececed;
-  --text-secondary: #8b8b8e;
-  --text-muted: #5c5c60;
+  --text-primary: #ffffff;
+  --text-secondary: #f1d089;
+  --text-muted: #b88e45;
 
-  /* Brand */
-  --accent: #4f8ff7;
-  --accent-hover: #6ba0f8;
-  --accent-subtle: rgba(79, 143, 247, 0.1);
-  --orange: #e87d3e;
-  --orange-subtle: rgba(232, 125, 62, 0.1);
+  --accent: #b85a10;
+  --accent-hover: #cf6d1e;
+  --accent-subtle: rgba(184, 90, 16, 0.2);
+  --orange: #c46116;
+  --orange-subtle: rgba(196, 97, 22, 0.16);
 
-  /* Status */
-  --green: #3dba6c;
-  --green-subtle: rgba(61, 186, 108, 0.08);
-  --yellow: #d4a025;
-  --yellow-subtle: rgba(212, 160, 37, 0.08);
-  --red: #d1453b;
-  --red-subtle: rgba(209, 69, 59, 0.08);
+  --green: #c9941d;
+  --green-subtle: rgba(201, 148, 29, 0.16);
+  --yellow: #c9941d;
+  --yellow-subtle: rgba(201, 148, 29, 0.16);
+  --red: #b85a10;
+  --red-subtle: rgba(184, 90, 16, 0.2);
 
-  /* Borders */
-  --border: #2a2a2d;
-  --border-hover: #3a3a3e;
+  --border: #5a3f21;
+  --border-hover: #7d592f;
 
-  /* Misc */
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --transition: 150ms ease;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --font: 'Manrope', 'Segoe UI', sans-serif;
+  --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
+  --transition: 180ms ease;
 }
 
-/* Reset */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -62,15 +55,52 @@ body {
   color: var(--text-primary);
   line-height: 1.6;
   min-height: 100vh;
+  letter-spacing: 0.01em;
 }
 
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg-body); }
-::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.18;
+  filter: blur(70px);
+}
+
+body::before {
+  width: 340px;
+  height: 340px;
+  background: #a14d0f;
+  top: -80px;
+  left: -80px;
+}
+
+body::after {
+  width: 300px;
+  height: 300px;
+  background: #8f6a1a;
+  right: -100px;
+  bottom: -90px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-body);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6e4e28;
+  border-radius: 99px;
+}
 
 ::selection {
   background: var(--accent-subtle);
-  color: var(--accent);
+  color: var(--text-primary);
 }
 
 a {
@@ -78,54 +108,67 @@ a {
   text-decoration: none;
 }
 
-a:hover { text-decoration: underline; }
+a:hover {
+  text-decoration: underline;
+}
 
-img { max-width: 100%; display: block; }
-
-/* ============================================
-   BUTTONS
-   ============================================ */
+img {
+  max-width: 100%;
+  display: block;
+}
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 7px;
-  padding: 10px 20px;
-  border: none;
+  gap: 8px;
+  padding: 11px 20px;
+  border: 1px solid transparent;
   border-radius: var(--radius-md);
-  font-family: var(--font);
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-family: var(--font-display);
+  font-size: 0.86rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background var(--transition), opacity var(--transition);
+  transition: transform var(--transition), background var(--transition), border-color var(--transition), color var(--transition), opacity var(--transition);
   white-space: nowrap;
 }
 
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
 .btn:disabled {
-  opacity: 0.45;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
 .btn-primary {
   background: var(--accent);
-  color: #fff;
+  color: #fff8ee;
+  border-color: #ffcf8d55;
+  box-shadow: 0 10px 20px rgba(125, 59, 10, 0.35);
 }
-.btn-primary:hover:not(:disabled) { background: var(--accent-hover); }
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
 
 .btn-secondary {
-  background: transparent;
+  background: #291d10;
   color: var(--text-secondary);
-  border: 1px solid var(--border);
+  border-color: var(--border);
 }
+
 .btn-secondary:hover:not(:disabled) {
-  border-color: var(--border-hover);
   color: var(--text-primary);
+  border-color: var(--border-hover);
+  background: #352514;
 }
 
 .btn-danger {
-  background: var(--red);
-  color: #fff;
+  background: #3a1f10;
+  border-color: #7a3f1d;
+  color: #ffcf9f;
 }
 
 .btn-ghost {
@@ -133,45 +176,58 @@ img { max-width: 100%; display: block; }
   color: var(--text-secondary);
   padding: 8px 12px;
 }
+
 .btn-ghost:hover:not(:disabled) {
   color: var(--text-primary);
   background: var(--bg-hover);
 }
 
-.btn-sm { padding: 7px 14px; font-size: 0.8125rem; }
-.btn-lg { padding: 12px 28px; font-size: 0.9375rem; }
+.btn-sm {
+  padding: 8px 14px;
+  font-size: 0.78rem;
+}
 
-/* ============================================
-   FORMS
-   ============================================ */
+.btn-lg {
+  padding: 13px 28px;
+  font-size: 0.92rem;
+}
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 7px;
 }
 
 .form-label {
-  font-size: 0.8125rem;
-  font-weight: 500;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 600;
   color: var(--text-secondary);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
 
 .form-input {
   width: 100%;
-  padding: 10px 14px;
+  padding: 11px 14px;
   background: var(--bg-input);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   color: var(--text-primary);
   font-family: var(--font);
-  font-size: 0.875rem;
+  font-size: 0.92rem;
   outline: none;
-  transition: border-color var(--transition);
+  transition: border-color var(--transition), box-shadow var(--transition);
 }
 
-.form-input::placeholder { color: var(--text-muted); }
-.form-input:focus { border-color: var(--accent); }
+.form-input::placeholder {
+  color: var(--text-muted);
+}
+
+.form-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(184, 90, 16, 0.24);
+}
 
 textarea.form-input {
   resize: vertical;
@@ -183,60 +239,58 @@ select.form-input {
   appearance: auto;
 }
 
-/* ============================================
-   CARD
-   ============================================ */
-
 .card {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
+  box-shadow: 0 14px 32px rgba(6, 9, 16, 0.35);
 }
 
-/* ============================================
-   LAYOUT
-   ============================================ */
-
 .page-wrap {
-  padding: 32px 24px 60px;
-  max-width: 1100px;
+  padding: 36px 24px 64px;
+  max-width: 1140px;
   margin: 0 auto;
 }
 
 .page-title {
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: 1.82rem;
+  font-weight: 700;
   color: var(--text-primary);
+  letter-spacing: -0.02em;
   margin-bottom: 4px;
 }
 
 .page-subtitle {
-  font-size: 0.875rem;
+  font-size: 0.92rem;
   color: var(--text-secondary);
 }
 
-/* ============================================
-   RESPONSIVE
-   ============================================ */
-
-@media (max-width: 768px) {
-  .page-wrap { padding: 20px 16px 40px; }
-  .page-title { font-size: 1.25rem; }
+.text-cyan {
+  color: var(--accent);
 }
 
-/* ============================================
-   LOADING
-   ============================================ */
+@media (max-width: 768px) {
+  .page-wrap {
+    padding: 24px 14px 40px;
+  }
+
+  .page-title {
+    font-size: 1.38rem;
+  }
+}
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .spinner {
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--border);
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--border);
   border-top-color: var(--accent);
   border-radius: 50%;
-  animation: spin 0.6s linear infinite;
+  animation: spin 0.7s linear infinite;
 }

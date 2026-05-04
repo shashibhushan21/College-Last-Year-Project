@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { dashboardService } from '../../services/services';
 import { motion } from 'framer-motion';
 import { HiOutlineArrowLeft, HiOutlineCheck, HiOutlineExclamation, HiOutlineLightBulb } from 'react-icons/hi';
+import feedbackResults from '../../assets/illustrations/feedback-results.svg';
 import './Feedback.css';
 
 const fade = {
@@ -35,12 +36,17 @@ export default function Feedback() {
 
       {/* Overview */}
       <motion.div className="fb-overview card" variants={fade} initial="hidden" animate="visible" custom={0}>
-        <div className={`fb-score fb-score--${sc}`}>{interview.overallScore}</div>
-        <div className="fb-overview__info">
-          <h1 className="fb-overview__title">{interview.category} Interview</h1>
-          <p className="fb-overview__meta">
-            {interview.questions.filter(q => q.userAnswer).length}/{interview.questions.length} answered · {new Date(interview.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-          </p>
+        <div className="fb-overview__copy">
+          <div className={`fb-score fb-score--${sc}`}>{interview.overallScore}</div>
+          <div className="fb-overview__info">
+            <h1 className="fb-overview__title">{interview.category} Interview</h1>
+            <p className="fb-overview__meta">
+              {interview.questions.filter(q => q.userAnswer).length}/{interview.questions.length} answered · {new Date(interview.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+            </p>
+          </div>
+        </div>
+        <div className="fb-overview__art">
+          <img src={feedbackResults} alt="Interview feedback illustration" />
         </div>
       </motion.div>
 

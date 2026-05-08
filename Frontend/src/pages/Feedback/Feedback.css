@@ -29,7 +29,7 @@
   align-items: center;
   gap: 24px;
   margin-bottom: 20px;
-  background: #261b0f;
+  background: #11131a;
 }
 
 .fb-overview__copy {
@@ -63,9 +63,9 @@
   flex-shrink: 0;
 }
 
-.fb-score--green { color: #ffe0b4; background: #4a2e16; }
-.fb-score--yellow { color: #ffd98d; background: #5b3b1b; }
-.fb-score--red { color: #ffd1a1; background: #6b3917; }
+.fb-score--green { color: #e3f0d7; background: #1b2720; }
+.fb-score--yellow { color: #f4e7be; background: #252417; }
+.fb-score--red { color: #f4d3d1; background: #261919; }
 
 .fb-overview__title { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; margin-bottom: 3px; }
 .fb-overview__meta { font-size: 0.8125rem; color: var(--text-muted); }
@@ -78,7 +78,7 @@
   margin-bottom: 28px;
 }
 
-.fb-acard { padding: 20px; background: #261b0f; }
+.fb-acard { padding: 20px; background: #11131a; }
 .fb-acard--full { grid-column: 1 / -1; }
 
 .fb-acard__title {
@@ -92,9 +92,9 @@
 }
 
 .fb-icon { font-size: 1rem; }
-.fb-icon--green { color: #ffd7a0; }
-.fb-icon--yellow { color: #ffd17a; }
-.fb-icon--blue { color: #ffc879; }
+.fb-icon--green { color: #d9b15f; }
+.fb-icon--yellow { color: #e0c08a; }
+.fb-icon--blue { color: #bfc7d6; }
 
 .fb-list {
   list-style: none;
@@ -130,9 +130,9 @@
   margin-bottom: 14px;
 }
 
-.fb-q { padding: 20px; margin-bottom: 12px; background: #261b0f; }
+.fb-q { padding: 20px; margin-bottom: 12px; background: #11131a; }
 .fb-q__head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-.fb-q__num { font-size: 0.71rem; font-weight: 600; color: #ffe3b8; background: #5a3919; padding: 2px 8px; border-radius: 4px; }
+.fb-q__num { font-size: 0.71rem; font-weight: 600; color: #f2d7aa; background: #161a22; padding: 2px 8px; border-radius: 4px; }
 
 .fb-q__question { font-size: 0.9rem; font-weight: 600; line-height: 1.6; margin-bottom: 12px; }
 
@@ -147,7 +147,7 @@
 }
 
 .fb-q__answer {
-  background: #1f160b;
+  background: #0b0d12;
   border-radius: var(--radius-md);
   border: 1px solid var(--border);
   padding: 12px;
@@ -156,8 +156,8 @@
 .fb-q__answer p { font-size: 0.84rem; color: var(--text-secondary); line-height: 1.6; }
 
 .fb-q__feedback {
-  background: #402915;
-  border: 1px solid #8a5d2b;
+  background: #151922;
+  border: 1px solid #313847;
   border-radius: var(--radius-md);
   padding: 12px;
 }

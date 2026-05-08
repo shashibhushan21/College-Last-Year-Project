@@ -3,6 +3,9 @@ services:
     name: prepai-backend
     env: node
     rootDir: Backend
-    buildCommand: npm ci && npm run build
-    startCommand: npm start
+    buildCommand: npm install --legacy-peer-deps
+    startCommand: node server.js
     autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
